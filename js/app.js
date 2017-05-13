@@ -2,20 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+class Header extends React.Component {
+    render() {
+        return (
+        <div id="header">freeCodeCamp Leader Board </div>
+        )
+}
+}
+    
 class LeaderBoard extends React.Component {
     handleChange(e){
         this.props.handleData(e.target.id);
     }
+
     render() {
         return (
-        <div id="board">
+        <div>   
         <table>
         <thead>
         <tr>
             <th> # </th>
             <th> Camper Name </th>
-            <th id="recent" onClick={this.handleChange.bind(this)}> Points in the past 30days </th>
-            <th id="alltime" onClick={this.handleChange.bind(this)}> All time points </th>
+            <th id="recent" className="cell" onClick={this.handleChange.bind(this)}> Points in the past 30days</th>
+            <th id="alltime" className="cell" onClick={this.handleChange.bind(this)}> All time points </th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +45,16 @@ class LeaderBoard extends React.Component {
     </div>
         )
     }
+}
+
+class Footer extends React.Component {
+    render() {
+        return (
+           <div> 
+            <p id="footer">Coded by Ayumi Saito </p>
+            </div>
+        )
+}
 }
 
 class App extends React.Component {
@@ -70,8 +89,12 @@ class App extends React.Component {
         
     render() {
         return (
-        <div>
-        <LeaderBoard data={this.state.item} />
+        <div className="container">
+        <div className="col-xs-12 col-md-8 offset-md-2">
+        <Header />
+        <LeaderBoard handleData={this.handleData.bind(this)} data={this.state.item} />
+        <Footer />
+        </div>
         </div>
         )
     }

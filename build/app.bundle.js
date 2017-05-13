@@ -10250,8 +10250,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LeaderBoard = function (_React$Component) {
-    _inherits(LeaderBoard, _React$Component);
+var Header = function (_React$Component) {
+    _inherits(Header, _React$Component);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'header' },
+                'freeCodeCamp Leader Board '
+            );
+        }
+    }]);
+
+    return Header;
+}(_react2.default.Component);
+
+var LeaderBoard = function (_React$Component2) {
+    _inherits(LeaderBoard, _React$Component2);
 
     function LeaderBoard() {
         _classCallCheck(this, LeaderBoard);
@@ -10269,7 +10292,7 @@ var LeaderBoard = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'board' },
+                null,
                 _react2.default.createElement(
                     'table',
                     null,
@@ -10291,12 +10314,12 @@ var LeaderBoard = function (_React$Component) {
                             ),
                             _react2.default.createElement(
                                 'th',
-                                { id: 'recent', onClick: this.handleChange.bind(this) },
-                                ' Points in the past 30days '
+                                { id: 'recent', className: 'cell', onClick: this.handleChange.bind(this) },
+                                ' Points in the past 30days'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                { id: 'alltime', onClick: this.handleChange.bind(this) },
+                                { id: 'alltime', className: 'cell', onClick: this.handleChange.bind(this) },
                                 ' All time points '
                             )
                         )
@@ -10320,7 +10343,7 @@ var LeaderBoard = function (_React$Component) {
                                     _react2.default.createElement(
                                         'a',
                                         { href: 'https://www.freecodecamp.com/' + user.username },
-                                        _react2.default.createElement('img', { src: '{user.img}', className: 'profileImg' }),
+                                        _react2.default.createElement('img', { src: user.img, className: 'profileImg' }),
                                         _react2.default.createElement(
                                             'p',
                                             null,
@@ -10349,22 +10372,49 @@ var LeaderBoard = function (_React$Component) {
     return LeaderBoard;
 }(_react2.default.Component);
 
-var App = function (_React$Component2) {
-    _inherits(App, _React$Component2);
+var Footer = function (_React$Component3) {
+    _inherits(Footer, _React$Component3);
+
+    function Footer() {
+        _classCallCheck(this, Footer);
+
+        return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+    }
+
+    _createClass(Footer, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'p',
+                    { id: 'footer' },
+                    'Coded by Ayumi Saito '
+                )
+            );
+        }
+    }]);
+
+    return Footer;
+}(_react2.default.Component);
+
+var App = function (_React$Component4) {
+    _inherits(App, _React$Component4);
 
     function App(props) {
         _classCallCheck(this, App);
 
         //assign state itself, and a default value for items
-        var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this2.state = {
+        _this4.state = {
             item: []
         };
 
         // bind data 
-        _this2.handleData = _this2.handleData.bind(_this2);
-        return _this2;
+        _this4.handleData = _this4.handleData.bind(_this4);
+        return _this4;
     }
     // set up 'alltime' as a default
 
@@ -10377,10 +10427,10 @@ var App = function (_React$Component2) {
     }, {
         key: 'handleData',
         value: function handleData(key) {
-            var _this3 = this;
+            var _this5 = this;
 
             _axios2.default.get('https://fcctop100.herokuapp.com/api/fccusers/top/' + key).then(function (response) {
-                _this3.setState({
+                _this5.setState({
                     item: response.data
                 });
             }).catch(function (err) {
@@ -10392,8 +10442,14 @@ var App = function (_React$Component2) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(LeaderBoard, { data: this.state.item })
+                { className: 'container' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-8 offset-md-2' },
+                    _react2.default.createElement(Header, null),
+                    _react2.default.createElement(LeaderBoard, { handleData: this.handleData.bind(this), data: this.state.item }),
+                    _react2.default.createElement(Footer, null)
+                )
             );
         }
     }]);

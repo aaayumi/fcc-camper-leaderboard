@@ -1,10 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+body {
+    font-family: "Nunito", sans-serif;
+    background-color:#ffffd6;
+    
+}
+
+.container {
+    text-align:center;
+}
+
+#header {
+    margin-top:30px;
+    font-size: 40px;
+}
 
 table {
+    margin-top:30px;
 	border-collapse: collapse;
+    box-shadow: 5px 5px 5px #888888;
 }
 
 th,
 td {
 	border: 2px solid black;
 	padding: 20px 20px;
+    text-align:center;
+}
+
+th {
+    background-color:#bfff7f;
+}
+
+.cell:hover {
+    background-color: #ffff7f;
+}
+
+tr:nth-child(odd){
+    background:white;
+}
+
+tr:nth-child(even){
+    background:#eaffd6;
+}
+
+
+img {
+    height: 40px;
+    width: 40px;
+    border: 2px solid #808080;
+}
+
+#footer {
+    margin-top: 20px;
 }
